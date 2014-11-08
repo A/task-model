@@ -1,5 +1,7 @@
 ## Task Model
 
+[![Build Status](https://travis-ci.org/shuvalov-anton/tasks.svg)](https://travis-ci.org/shuvalov-anton/tasks)
+
 Simply high leveled task class with mongoose backend and ES6-genetators.
 
 ## API
