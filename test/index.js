@@ -1,14 +1,15 @@
 'use strict';
 
+// Dependencies
 var Tasks    = require('../lib/tasks');
 var co       = require('co');
-var mongoose = require('mongoose');
 var tasks    = new Tasks();
+var mongoose = require('../setup/mongoose');
+
 
 // setup mongoose and clear db
 before(co(function * () {
-  var Task     = mongoose.model('Task');
-  yield require('../setup/mongoose');
+  var Task = mongoose.model('Task');
   yield Task.remove.bind(Task);
 }));
 

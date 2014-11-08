@@ -13,13 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "co": "^3.1.0",
-    "commander": "^2.5.0",
-    "deferred": "^0.7.1",
-    "mocha": "^2.0.1",
-    "mongodb-autoincrement": "^1.0.0",
+    "mongodb-autoincrement": "^1.0.0"
+  },
+  "devDependencies": {
     "mongoose": "^3.8.18",
-    "mongoose-q": "0.0.13",
-    "should": "^4.2.1",
-    "thunkify": "^2.1.2"
+    "mocha": "^2.0.1",
+    "should": "^4.2.1"
   }
 }

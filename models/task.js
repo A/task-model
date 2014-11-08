@@ -4,7 +4,6 @@ var mongoose      = require('mongoose');
 var Schema        = mongoose.Schema;
 var autoIncrement = require('mongodb-autoincrement');
 var co            = require('co');
-var thunkify      = require('thunkify');
 
 var TaskSchema = new Schema({
   name: {
