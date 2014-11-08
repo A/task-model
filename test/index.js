@@ -4,11 +4,12 @@
 var Tasks    = require('../lib/tasks');
 var co       = require('co');
 var tasks    = new Tasks();
-var mongoose = require('../setup/mongoose');
+var mongoose = require('mongoose');
 
 
 // setup mongoose and clear db
 before(co(function * () {
+  mongoose.connect('localhost');
   var Task = mongoose.model('Task');
   yield Task.remove.bind(Task);
 }));

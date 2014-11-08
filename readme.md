@@ -14,7 +14,7 @@ var tasks = new Tasks(options);
 var TaskSchema = new Schema({
   name: String, // task name
   description: String, // task description
-  tags: [String], // list of tags (projects, contexts and other shits)
+  tags: [String], // list of tags (projects, contexts and other stuff)
   estimate: Number, // estimate time in ms
   created: Date, // date of creation
   due: Date, // used for tasks.next()
