@@ -1,6 +1,6 @@
 ## Task Model
 
-Simply high liveled task class with mongoose backend and ES6-genetators.
+Simply high leveled task class with mongoose backend and ES6-genetators.
 
 ## API
 
