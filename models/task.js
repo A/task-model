@@ -42,7 +42,6 @@ TaskSchema.static('add', function * (data) {
 
 // return task by id(if number) or tag(if string or array)
 TaskSchema.static('get', function * (id) {
-  console.log('get');
   return yield 'number' === typeof id
     ? Task.findById(id).exec()
     : Task.find({ tag: id }).exec();
@@ -54,10 +53,11 @@ TaskSchema.static('list', co(function * (tag) {
 }));
 
 // update task w/ given data
-TaskSchema.static('update', co(function * (id, data) {
-  var task = this.get(id);
-  return yield task.update(data).exec();
-}));
+TaskSchema.static('updateTask', function * (id, data) {
+  var task = yield Task.get(id);
+  var update = thunkify(task.update.bind(task));
+  return yield update(data);
+});
 
 // Remove task by cid
 TaskSchema.static('del', co(function * (id) {

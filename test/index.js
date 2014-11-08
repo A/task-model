@@ -10,19 +10,19 @@ before(co(function * () {
   yield Task.remove.bind(Task);
 }));
 describe('tasks', function() {
-  var list;
   it('should add tasks', co(function * () {
     yield tasks.add({ name: 'first task' });
     yield tasks.add({ name: 'second task' });
-    list = yield tasks.get();
+    var list = yield tasks.get();
     list.length.should.equal(2);
   }));
-  // it('should update tasks', function() {
-  //   var task = list[0];
-  //   task.update({ project: 'save the world' });
-  //   list = tasks.get();
-  //   list[0].project.should.equal('save the world');
-  // });
+  it('should update tasks', co(function * () {
+    var list = yield tasks.get();
+    var id = list[0]._id;
+    yield Task.updateTask(id, { tags: 'save the world' });
+    var updated = yield tasks.get(id);
+    updated.tags.should.containEql('save the world');
+  }));
   // it('should delete task', function() {
   //   var task = list[1];
   //   task.del();
