@@ -1,6 +1,6 @@
 {
-  "name": "tasks",
-  "version": "0.0.0",
+  "name": "task-me/task-model",
+  "version": "0.1.0",
   "description": "stupid task manager",
   "main": "index.js",
   "scripts": {
