@@ -23,10 +23,11 @@ describe('tasks', function() {
     var updated = yield tasks.get(id);
     updated.tags.should.containEql('save the world');
   }));
-  // it('should delete task', function() {
-  //   var task = list[1];
-  //   task.del();
-  //   list = tasks.get();
-  //   list.length.should.equal(1);
-  // });
+  it('should delete task', co(function * () {
+    var list = yield tasks.get();
+    var id = list[1]._id;
+    yield Task.del(id);
+    list = yield Task.get();
+    list.length.should.equal(1);
+  }));
 });

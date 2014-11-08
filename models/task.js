@@ -60,19 +60,21 @@ TaskSchema.static('updateTask', function * (id, data) {
 });
 
 // Remove task by cid
-TaskSchema.static('del', co(function * (id) {
-  var task = this.get(id);
-  return yield task.remove();
-}));
+TaskSchema.static('del', function * (id) {
+  if ('number' !== typeof id) { return; }
+  var task = yield this.get(id);
+  var remove = task.remove.bind(task);
+  return yield remove;
+});
 
 // Return next n tasks to do
-TaskSchema.static('next', co(function * (n) {
+TaskSchema.static('next', function * (n) {
   return yield this
     .find()
     .sort('start due')
     .limit(n)
     .exec()
   ;
-}));
+});
 
 var Task = module.exports = mongoose.model('Task', TaskSchema);
