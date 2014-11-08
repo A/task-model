@@ -3,3 +3,5 @@ node_js:
   - "0.11"
 services:
   - mongodb
+after_success:
+  - export CODECLIMATE_REPO_TOKEN=b2d7d33368a595d71fdf7fb3552e00dfc2bae22b2f06f96c737db967aa6dd572; ./node_modules/.bin/jscoverage lib lib-cov; TASKS_COV=1 ./node_modules/.bin/mocha -R mocha-lcov-reporter | ./node_modules/.bin/codeclimate

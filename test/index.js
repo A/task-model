@@ -1,7 +1,7 @@
 'use strict';
 
 // Dependencies
-var Tasks    = require('../lib/tasks');
+var Tasks    = require('..');
 var co       = require('co');
 var tasks    = new Tasks();
 var mongoose = require('mongoose');

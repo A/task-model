@@ -1,2 +1,3 @@
-require('./setup/mongoose');
-module.exports = require('./models/task');
+module.exports = process.env.TASKS_COV
+  ? require('./lib-cov')
+  : require('./lib');

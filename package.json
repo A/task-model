@@ -16,6 +16,8 @@
     "mongodb-autoincrement": "^1.0.0"
   },
   "devDependencies": {
+    "jscoverage": "^0.5.9",
+    "mocha-lcov-reporter": "0.0.1",
     "mongoose": "^3.8.18",
     "mocha": "^2.0.1",
     "should": "^4.2.1"
