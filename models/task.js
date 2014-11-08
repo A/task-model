@@ -34,49 +34,4 @@ var TaskSchema = new Schema({
 // human friendly IDs
 TaskSchema.plugin(autoIncrement.mongoosePlugin);
 
-// Add new task
-TaskSchema.static('add', function * (data) {
-  var task = new Task(data);
-  return yield task.save.bind(task); // TODO: WTF WITH YIELDING HERE?
-});
-
-// return task by id(if number) or tag(if string or array)
-TaskSchema.static('get', function * (id) {
-  var q = 'number' === typeof id
-    ? Task.findById(id)
-    : Task.find();
-  'string' === typeof id && q.where({ tags: id });
-  return yield q.exec();
-});
-
-// Show tasks list
-TaskSchema.static('list', co(function * (tag) {
-  return yield this.find({tag: tag}).exec();
-}));
-
-// update task w/ given data
-TaskSchema.static('updateTask', function * (id, data) {
-  var task = yield Task.get(id);
-  var update = thunkify(task.update.bind(task));
-  return yield update(data);
-});
-
-// Remove task by cid
-TaskSchema.static('del', function * (id) {
-  if ('number' !== typeof id) { return; }
-  var task = yield this.get(id);
-  var remove = task.remove.bind(task);
-  return yield remove;
-});
-
-// Return next n tasks to do
-TaskSchema.static('next', function * (n) {
-  return yield this
-    .find()
-    .sort('start due')
-    .limit(n)
-    .exec()
-  ;
-});
-
 var Task = module.exports = mongoose.model('Task', TaskSchema);
