@@ -1,2 +1,0 @@
-require('./tag');
-require('./task');

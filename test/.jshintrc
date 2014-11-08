@@ -1,6 +1,7 @@
 {
   "browser": false,
   "curly": true,
+  "esnext": true,
   "expr": true,
   "indent": false,
   "jquery": false,
@@ -16,6 +17,7 @@
   "undef": true,
   "globals": {
     "describe": true,
-    "it": true
+    "it": true,
+    "before": true
   }
 }
