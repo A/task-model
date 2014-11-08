@@ -42,14 +42,16 @@ TaskSchema.static('add', function * (data) {
 
 // return task by id(if number) or tag(if string or array)
 TaskSchema.static('get', function * (id) {
-  return yield 'number' === typeof id
-    ? Task.findById(id).exec()
-    : Task.find({ tag: id }).exec();
+  var q = 'number' === typeof id
+    ? Task.findById(id)
+    : Task.find();
+  'string' === typeof id && q.where({ tags: id });
+  return yield q.exec();
 });
 
 // Show tasks list
 TaskSchema.static('list', co(function * (tag) {
-  return yield this.find({tag: tag || null}).exec();
+  return yield this.find({tag: tag}).exec();
 }));
 
 // update task w/ given data
