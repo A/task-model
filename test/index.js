@@ -51,4 +51,17 @@ describe('tasks', function() {
     list.length.should.equal(1);
   }));
 
+  it('should return list of the next tasks', co(function * () {
+    yield tasks.add({ name: '1', due:   +new Date() - 10000 });
+    yield tasks.add({ name: '3', start: +new Date() - 20000 });
+    yield tasks.add({ name: '4', start: +new Date()         });
+    yield tasks.add({ name: '5', start: +new Date() + 10000 });
+    yield tasks.add({ name: '2', start: +new Date() - 50000 });
+    var next = yield tasks.next(5);
+    var order = next.map(function(i) {
+      return i.name;
+    });
+    order.should.eql(['1', '2', '3', '4', '5']);
+  }));
+
 });
