@@ -57,11 +57,11 @@ describe('tasks', function() {
     yield tasks.add({ name: '4', start: +new Date()         });
     yield tasks.add({ name: '5', start: +new Date() + 10000 });
     yield tasks.add({ name: '2', start: +new Date() - 50000 });
-    var next = yield tasks.next(5);
+    var next = yield tasks.next();
     var order = next.map(function(i) {
       return i.name;
     });
-    order.should.eql(['1', '2', '3', '4', '5']);
+    order.should.eql(['1', '2', '3', '4']);
   }));
 
 });
