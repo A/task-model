@@ -9,7 +9,6 @@ var mongoose = require('mongoose');
 
 // setup mongoose and clear db
 before(co(function * () {
-  mongoose.connect('localhost');
   var Task = mongoose.model('Task');
   yield Task.remove.bind(Task);
 }));
