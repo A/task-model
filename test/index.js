@@ -27,7 +27,7 @@ describe('tasks', function() {
 
   it('should get tasks by id', co(function * () {
     var list = yield tasks.get();
-    var task = yield tasks.get(list[0]._id);
+    var task = yield tasks.get(list[0].uid);
     task.should.have.property('name', 'first task');
   }));
 
@@ -38,7 +38,7 @@ describe('tasks', function() {
 
   it('should update tasks', co(function * () {
     var list = yield tasks.get();
-    var id = list[0]._id;
+    var id = list[0].uid;
     yield tasks.update(id, { tags: 'save the world' });
     var updated = yield tasks.get(id);
     updated.tags.should.containEql('save the world');
@@ -46,7 +46,7 @@ describe('tasks', function() {
 
   it('should delete task', co(function * () {
     var list = yield tasks.get();
-    var id = list[1]._id;
+    var id = list[1].uid;
     yield tasks.remove(id);
     list = yield tasks.get();
     list.length.should.equal(1);
@@ -69,7 +69,7 @@ describe('tasks', function() {
 
     it('should done the task', co(function * () {
       var list = yield tasks.get();
-      var id = list[0]._id;
+      var id = list[0].uid;
       yield tasks.done(id);
       var task = yield tasks.get(id);
       task.should.have.property('done', true);
@@ -77,20 +77,48 @@ describe('tasks', function() {
 
     it('should remove task from get() results', co(function * () {
       var list = yield tasks.get();
-      var id = list[0]._id;
+      var id = list[0].uid;
       yield tasks.done(id);
       list = yield tasks.get();
-      list = list.map(function(i) { return i._id; });
+      list = list.map(function(i) { return i.uid; });
       list.should.not.containEql(id);
     }));
 
     it('should remove task from next() results', co(function * () {
       var next = yield tasks.next();
-      var id = next[0]._id;
+      var id = next[0].uid;
       yield tasks.done(id);
       next = yield tasks.next();
-      next = next.map(function(i) { return i._id; });
+      next = next.map(function(i) { return i.uid; });
       next.should.not.containEql(id);
+    }));
+
+  });
+
+  describe('search()', function() {
+
+    before(co(function * () {
+      yield tasks.add({ name: 'foo', description: 'bar', tags: ['baz'] });
+      yield tasks.add({ name: 'foo ter', description: 'beep boop', tags: ['bar', 'baz'] });
+      yield tasks.add({ name: 'robot', description: 'bar roque', tags: ['fuzz']});
+    }));
+
+    it('should find tasks contains the text', co(function * () {
+      var results = yield tasks.find('foo');
+      results = results.map(function(i) { return i.name; });
+      results.should.containEql('foo').and.containEql('foo ter');
+    }));
+
+    it('should find tasks by description', co(function * () {
+      var results = yield tasks.find('bar');
+      results = results.map(function(i) { return i.name; });
+      results.should.containEql('foo').and.containEql('robot');
+    }));
+
+    it('should find tasks by tags', co(function * () {
+      var results = yield tasks.find('baz');
+      results = results.map(function(i) { return i.name; });
+      results.should.containEql('foo').and.containEql('foo ter');
     }));
 
   });
