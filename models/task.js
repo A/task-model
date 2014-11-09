@@ -27,7 +27,11 @@ var TaskSchema = new Schema({
     index: true
   },
   due: Date,
-  start: Date
+  start: Date,
+  done: {
+    type: Boolean,
+    default: false
+  }
 });
 
 // human friendly IDs

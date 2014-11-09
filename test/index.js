@@ -65,4 +65,34 @@ describe('tasks', function() {
     order.should.eql(['1', '2', '3', '4']);
   }));
 
+  describe('done()', function() {
+
+    it('should done the task', co(function * () {
+      var list = yield tasks.get();
+      var id = list[0]._id;
+      yield tasks.done(id);
+      var task = yield tasks.get(id);
+      task.should.have.property('done', true);
+    }));
+
+    it('should remove task from get() results', co(function * () {
+      var list = yield tasks.get();
+      var id = list[0]._id;
+      yield tasks.done(id);
+      list = yield tasks.get();
+      list = list.map(function(i) { return i._id; });
+      list.should.not.containEql(id);
+    }));
+
+    it('should remove task from next() results', co(function * () {
+      var next = yield tasks.next();
+      var id = next[0]._id;
+      yield tasks.done(id);
+      next = yield tasks.next();
+      next = next.map(function(i) { return i._id; });
+      next.should.not.containEql(id);
+    }));
+
+  });
+
 });
