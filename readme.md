@@ -4,6 +4,12 @@
 
 Simply high leveled task class with mongoose backend and ES6-genetators.
 
+## Install
+
+```
+npm install task-model
+```
+
 ## API
 
 ```js
@@ -30,7 +36,7 @@ Create the task with given task object. Return new task document;
 
 #### tasks#*done(id)
 
-Mark task as finished and remove it from `next()` and `get()` results. 
+Mark task as finished and remove it from `next()` and `get()` results.
 Return task document.
 
 #### tasks#*get()
