@@ -65,6 +65,13 @@ describe('tasks', function() {
       updated.tags.should.containEql('save the world');
     }));
 
+    it('should return task document', co(function * () {
+      var list = yield tasks.get();
+      var id = list[0].uid;
+      var task = yield tasks.update(id, { tags: 'save the world' });
+      task.should.have.property('uid');
+    }));
+
   });
 
   describe('remove()', function() {
@@ -77,6 +84,12 @@ describe('tasks', function() {
       list.length.should.equal(1);
     }));
 
+    it('should return task document', co(function * () {
+      var list = yield tasks.get();
+      var id = list[0].uid;
+      var task = yield tasks.remove(id);
+      task.should.have.property('uid');
+    }));
   });
 
   describe('next()', function() {
@@ -122,6 +135,13 @@ describe('tasks', function() {
       next = yield tasks.next();
       next = next.map(function(i) { return i.uid; });
       next.should.not.containEql(id);
+    }));
+
+    it('should return task document', co(function * () {
+      var list = yield tasks.get();
+      var id = list[0].uid;
+      var task = yield tasks.done(id);
+      task.should.have.property('uid');
     }));
 
   });
