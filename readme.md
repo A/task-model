@@ -28,21 +28,26 @@ var TaskSchema = new Schema({
 
 Create the task with given task object. Return new task document;
 
+#### tasks#*done(id)
+
+Mark task as finished and remove it from `next()` and `get()` results. 
+Return task document.
+
 #### tasks#*get()
 
 Return all tasks.
 
 #### tasks#*get(id)
 
-Return task by id.
+Return task by id. `id` should be a number or string contains the number.
 
 #### tasks#*get(tag)
 
-Return all tasks with given tag.
+Return all tasks with given tag. Tag should be a string
 
 #### tasks#*update(id, updates)
 
-Update the task with given data. Return task document.
+Update the task with given data. Return updated task document.
 
 #### tasks#*remove(id)
 
