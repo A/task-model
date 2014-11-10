@@ -4,7 +4,7 @@
   "description": "task domain model",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --harmony"
+    "test": "NODE_ENV=test; mocha --harmony"
   },
   "author": "anton@shuvalov.info",
   "license": "MIT",
