@@ -90,6 +90,13 @@ describe('tasks', function() {
       var task = yield tasks.remove(id);
       task.should.have.property('uid');
     }));
+
+    it('should support strings with id', co(function * () {
+      var task = yield tasks.add({ name: 'first task', tags: ['inbox'] });
+      var id = task.uid.toString();
+      task = yield tasks.remove(id);
+      task.should.have.property('uid');
+    }));
   });
 
   describe('next()', function() {
