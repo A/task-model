@@ -1,25 +1,22 @@
 {
-  "name": "tasks-model",
+  "name": "task-model",
   "version": "1.0.0",
-  "description": "stupid task manager",
+  "description": "task domain model",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --harmony",
-    "start": "npm run mongo-start",
-    "mongo-start": "mongod --dbpath='./db' &; echo $! > .pid",
-    "mongo-stop": "cat .pid | xargs kill"
+    "test": "mocha --harmony"
   },
-  "author": "",
+  "author": "anton@shuvalov.info",
   "license": "MIT",
   "dependencies": {
     "co": "^3.1.0",
+    "mongoose": "^3.8.18",
     "mongoose-auto-increment": "^3.0.8",
     "mongoose-text-search": "0.0.2"
   },
   "devDependencies": {
     "jscoverage": "^0.5.9",
     "mocha-lcov-reporter": "0.0.1",
-    "mongoose": "^3.8.18",
     "mocha": "^2.0.1",
     "should": "^4.2.1"
   }
