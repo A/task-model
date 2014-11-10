@@ -57,6 +57,10 @@ Remove task by id. Return removed task document.
 
 Return next n tasks sorted by `due` and `start`.
 
+#### tasks#model
+
+Link to mongoose ODM model.
+
 ## Licence
 
 MIT
